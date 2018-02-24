@@ -57,9 +57,11 @@ public class ItemFrameLimiter implements Listener {
 				ItemMeta curm = cur.getItemMeta();
 				List<String> lore = curm != null && curm.hasLore() ? curm.getLore() : new ArrayList<>();
 				if (lore.contains("CreativeLimiter item.")) {
+					if (!p.hasPermission("limiter.bypass")) {
 					e.setCancelled(true);
 					p.sendMessage(Main.messageData.get("dontTakeItem").replaceAll("&", "§").replaceAll("%prefix%",
 							Main.messageData.get("Prefix").replaceAll("&", "§")));
+					}
 				}
 			}
 		}

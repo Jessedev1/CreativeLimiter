@@ -20,7 +20,7 @@ public class PickupItems implements Listener {
 	@EventHandler
 	public void onPickup(PlayerPickupItemEvent e) {
 		Player p = e.getPlayer();
-		if (ChangeGameMode.getBuildingPlayers().contains(p)) {
+		if (ChangeGameMode.getBuildingPlayers().contains(p) && !p.hasPermission("limiter.bypass")) {
 			e.setCancelled(true);
 			if (!pick.contains(p)) {
 				p.sendMessage(Main.messageData.get("noPickups").replaceAll("&", "§").replaceAll("%prefix%",

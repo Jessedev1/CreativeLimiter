@@ -13,8 +13,11 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import nl.mlgeditz.creativelimiter.db.Database;
 import nl.mlgeditz.creativelimiter.listeners.BreakFrameBlock;
 import nl.mlgeditz.creativelimiter.listeners.GameModeChecker;
+import nl.mlgeditz.creativelimiter.listeners.LeaveListener;
+import nl.mlgeditz.creativelimiter.listeners.block.BlockListener;
 import nl.mlgeditz.creativelimiter.listeners.blocks.DropItems;
 import nl.mlgeditz.creativelimiter.listeners.blocks.PickupItems;
 import nl.mlgeditz.creativelimiter.listeners.frames.ItemFrameLimiter;
@@ -30,7 +33,12 @@ import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
 public class Main extends JavaPlugin implements Listener {
 
 	
+		//TODO
+		//Stop het breken van blokken die zijn geplaatst in creative.
+		//Als je rejoint of server reload dan gaan de survival items weg.
+	
 	public static Plugin pl;
+	private static Database thdb;
 	public static HashMap<String, String> messageData = new HashMap<String, String>();
 
 	public void onEnable() {
@@ -41,10 +49,24 @@ public class Main extends JavaPlugin implements Listener {
 		Bukkit.getPluginManager().registerEvents(new DropItems(), this);
 		Bukkit.getPluginManager().registerEvents(new PickupItems(), this);
 		Bukkit.getPluginManager().registerEvents(new BreakFrameBlock(), this);
+		Bukkit.getPluginManager().registerEvents(new LeaveListener(), this);
+		Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
 		createConfig();
 
 		@SuppressWarnings("unused")
 		BukkitTask gmcheck = new GameModeChecker().runTaskTimer(this, 0, 1);
+		
+		try {
+		if (!this.getDataFolder().exists())
+			this.getDataFolder().mkdir();
+		thdb = new Database(new File(this.getDataFolder(), "blockdata.db"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Database thdb() {
+		return thdb;
 	}
 
 	private void createConfig() {
