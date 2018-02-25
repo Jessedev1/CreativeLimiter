@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>nl.mlgeditz</groupId>
-  <artifactId>CreativeLimiter</artifactId>
+  <artifactId>CreativeLimit</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>CreativeLimiter</name>
+  <name>CreativeLimit</name>
   <url>http://maven.apache.org</url>
 
   <properties>

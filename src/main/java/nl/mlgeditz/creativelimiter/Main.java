@@ -3,6 +3,7 @@ package nl.mlgeditz.creativelimiter;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -40,10 +41,10 @@ public class Main extends JavaPlugin implements Listener {
 	public static Plugin pl;
 	private static Database thdb;
 	public static HashMap<String, String> messageData = new HashMap<String, String>();
+	public List<String> list = getConfig().getStringList("Deny-Placing");
 
 	public void onEnable() {
 		pl = this;
-		Bukkit.broadcastMessage("heyy");
 		Bukkit.getPluginManager().registerEvents(new OpenInventory(), this);
 		Bukkit.getPluginManager().registerEvents(new ItemFrameLimiter(), this);
 		Bukkit.getPluginManager().registerEvents(new DropItems(), this);
@@ -52,6 +53,17 @@ public class Main extends JavaPlugin implements Listener {
 		Bukkit.getPluginManager().registerEvents(new LeaveListener(), this);
 		Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
 		createConfig();
+		
+		list.add("DIAMOND_BLOCK");
+		list.add("GOLD_BLOCK");
+		list.add("IRON_BLOCK");
+		list.add("EMERALD_BLOCK");
+		list.add("DIAMOND_ORE");
+		list.add("GOLD_ORE");
+		list.add("EMERALD_ORE");
+		list.add("IRON_ORE");
+		getConfig().set("Deny-Placing", list);
+		saveConfig();
 
 		@SuppressWarnings("unused")
 		BukkitTask gmcheck = new GameModeChecker().runTaskTimer(this, 0, 1);
@@ -97,6 +109,7 @@ public class Main extends JavaPlugin implements Listener {
 		setMessage("openDispenser", "%prefix% &cYou cannot open an &4Dispenser &cin &4Creative &cMode!");
 		setMessage("openPin", "%prefix% &cYou cannot open an &4Safesty Deposit Box &cin &4Creative &cMode!");
 		setMessage("cannotBreak", "%prefix% &cYou cannot §4Break §cThis §4Block§c!");
+		setMessage("cannotPlace", "%prefix% &cYou cannot §4Place §cThis §4Block§c!");
 
 		FileConfiguration config = YamlConfiguration.loadConfiguration(f);
 		for (String message : config.getKeys(false)) {
