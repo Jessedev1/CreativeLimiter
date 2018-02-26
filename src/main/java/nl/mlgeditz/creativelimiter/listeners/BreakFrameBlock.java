@@ -23,7 +23,8 @@ public class BreakFrameBlock implements Listener {
         for (Entity entity : e.getBlock().getWorld().getNearbyEntities(e.getBlock().getLocation(), 2, 2, 2)) {
             if (entity instanceof ItemFrame && entity.getLocation().getBlock().getRelative(((ItemFrame) entity).getAttachedFace()).equals(e.getBlock())) {
                 
-                if (e.getPlayer().getGameMode() == GameMode.SURVIVAL || e.getPlayer().getGameMode() == GameMode.ADVENTURE && !e.getPlayer().hasPermission("limiter.bypass")) {
+                if (e.getPlayer().getGameMode() == GameMode.SURVIVAL || e.getPlayer().getGameMode() == GameMode.ADVENTURE) {
+                	if (!e.getPlayer().hasPermission("limiter.bypass") || !e.getPlayer().hasPermission("limiter.break")) {
                     e.setCancelled(true);
                     e.getPlayer().sendMessage(Main.messageData.get("cannotBreak").replaceAll("&", "§").replaceAll("%prefix%",
     					Main.messageData.get("Prefix").replaceAll("&", "§")));
@@ -32,5 +33,6 @@ public class BreakFrameBlock implements Listener {
             }
         }
     }
+	}
 
 }

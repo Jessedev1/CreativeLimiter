@@ -20,7 +20,8 @@ public class PickupItems implements Listener {
 	@EventHandler
 	public void onPickup(PlayerPickupItemEvent e) {
 		Player p = e.getPlayer();
-		if (ChangeGameMode.getBuildingPlayers().contains(p) && !p.hasPermission("limiter.bypass")) {
+		if (ChangeGameMode.getBuildingPlayers().contains(p)) {
+			if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.pickup")) {
 			e.setCancelled(true);
 			if (!pick.contains(p)) {
 				p.sendMessage(Main.messageData.get("noPickups").replaceAll("&", "§").replaceAll("%prefix%",
@@ -32,6 +33,7 @@ public class PickupItems implements Listener {
 					}
 				}, 100L);
 			}
+		}
 		}
 	}
 }

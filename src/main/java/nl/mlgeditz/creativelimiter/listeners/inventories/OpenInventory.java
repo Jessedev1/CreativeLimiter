@@ -1,5 +1,8 @@
 package nl.mlgeditz.creativelimiter.listeners.inventories;
 
+import java.util.ArrayList;
+
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Beacon;
 import org.bukkit.block.Block;
@@ -16,6 +19,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.plugin.Plugin;
 
 import nl.mlgeditz.creativelimiter.Main;
 import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
@@ -28,11 +32,16 @@ import wouter.is.cool.DataType;
  */
 
 public class OpenInventory implements Listener {
+	
+	public ArrayList<Player> cd = new ArrayList<Player>();
+	
+	
 
 	@EventHandler
 	public void onOpenChest(InventoryOpenEvent e) {
 		HumanEntity p = e.getPlayer();
-		if (ChangeGameMode.getBuildingPlayers().contains(p) && !p.hasPermission("limiter.bypass")) {
+		if (ChangeGameMode.getBuildingPlayers().contains(p)) {
+			if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.openinv")) {
 			if (e.getInventory().getHolder() instanceof Chest || e.getInventory().getHolder() instanceof DoubleChest
 					|| e.getInventory().equals(p.getEnderChest())) {
 				e.setCancelled(true);
@@ -68,13 +77,17 @@ public class OpenInventory implements Listener {
 						Main.messageData.get("Prefix").replaceAll("&", "§")));
 			}
 		}
+		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 		Block b = e.getClickedBlock();
-		if (ChangeGameMode.getBuildingPlayers().contains(p) && !p.hasPermission("limiter.bypass")) {
+		if (ChangeGameMode.getBuildingPlayers().contains(p)) {
+			if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.openinv")) {
+
 		if (b.getType() == Material.ENCHANTMENT_TABLE) {
 			e.setCancelled(true);
 			p.sendMessage(Main.messageData.get("openEnchantingTable").replaceAll("&", "§").replaceAll("%prefix%",
@@ -83,6 +96,25 @@ public class OpenInventory implements Listener {
 			e.setCancelled(true);
 			p.sendMessage(Main.messageData.get("openBeacon").replaceAll("&", "§").replaceAll("%prefix%",
 					Main.messageData.get("Prefix").replaceAll("&", "§")));
+		} else if (p.getItemInHand().getType() == Material.CARROT_STICK) {
+			p.sendMessage(Main.messageData.get("openRugzak").replaceAll("&", "§").replaceAll("%prefix%",
+					Main.messageData.get("Prefix").replaceAll("&", "§")));
+			p.closeInventory();
+			e.setCancelled(true);
+		} else if (b.getType() == Material.RED_SANDSTONE_STAIRS) {
+			if (!cd.contains(p)) {
+				cd.add(p);
+				Bukkit.getScheduler().scheduleAsyncDelayedTask((Plugin) Main.pl, new Runnable() {
+			        public void run() {
+			        	cd.remove(p);
+			        }
+			      }, 1L);
+			e.setCancelled(true);
+			p.sendMessage(Main.messageData.get("openPin").replaceAll("&", "§").replaceAll("%prefix%",
+					Main.messageData.get("Prefix").replaceAll("&", "§")));
+			p.closeInventory();
+			}
+		}
 		}
 		}
 	}

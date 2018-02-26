@@ -108,6 +108,7 @@ public class Main extends JavaPlugin implements Listener {
 		setMessage("openShulker", "%prefix% &cYou cannot open an &4Shulker &cin &4Creative &cMode!");
 		setMessage("openDispenser", "%prefix% &cYou cannot open an &4Dispenser &cin &4Creative &cMode!");
 		setMessage("openPin", "%prefix% &cYou cannot open an &4Safesty Deposit Box &cin &4Creative &cMode!");
+		setMessage("openRugzak", "%prefix% &cYou cannot open an &4Backpack &cin &4Creative &cMode!");
 		setMessage("cannotBreak", "%prefix% &cYou cannot §4Break §cThis §4Block§c!");
 		setMessage("cannotPlace", "%prefix% &cYou cannot §4Place §cThis §4Block§c!");
 

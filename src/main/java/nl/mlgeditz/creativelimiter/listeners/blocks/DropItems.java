@@ -20,12 +20,14 @@ public class DropItems implements Listener {
 	@EventHandler
 	public void onPlayerDrop(PlayerDropItemEvent e) {
 		Player p = e.getPlayer();
-		if (ChangeGameMode.getBuildingPlayers().contains(p) && !p.hasPermission("limiter.bypass")) {
+		if (ChangeGameMode.getBuildingPlayers().contains(p)) {
+			if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.drop")) {
 			e.setCancelled(true);
 			p.sendMessage(Main.messageData.get("noDrops")
 					.replaceAll("&", "§")
 					.replaceAll("%prefix%", Main.messageData.get("Prefix")
 									        .replaceAll("&", "§")));
+		}
 		}
 	}
 }

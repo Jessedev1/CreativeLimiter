@@ -33,7 +33,7 @@ public class BlockListener implements Listener {
 		
 		if (p.getGameMode() == GameMode.CREATIVE) {
 		if (Main.pl.getConfig().getStringList("Deny-Placing").contains(b.getType().toString().toUpperCase())) {
-			if (!p.hasPermission("limiter.bypass")) {
+			if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.place")) {
 			e.setCancelled(true);
 			p.sendMessage(Main.messageData.get("cannotPlace").replaceAll("&", "§").replaceAll("%prefix%",
 					Main.messageData.get("Prefix").replaceAll("&", "§")));
@@ -62,7 +62,7 @@ public class BlockListener implements Listener {
 		try {
 		if (Main.thdb().getNewStatement().executeQuery("SELECT * FROM block WHERE loc='" + loc + "'").next()) {
 			if (p.getGameMode() != GameMode.CREATIVE) {
-				if (!p.hasPermission("limiter.bypass")) {
+				if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.break")) {
 			e.setCancelled(true);
 			p.sendMessage(Main.messageData.get("cannotBreak").replaceAll("&", "§").replaceAll("%prefix%",
 					Main.messageData.get("Prefix").replaceAll("&", "§")));

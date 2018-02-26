@@ -20,9 +20,11 @@ public class LeaveListener implements Listener {
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
-		if (ChangeGameMode.getBuildingPlayers().contains(p) && !p.hasPermission("limiter.bypass")) {
+		if (ChangeGameMode.getBuildingPlayers().contains(p)) {
+			if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.holdinv")) {
 			ChangeGameMode.leaveBuildMode(p);
 			p.setGameMode(GameMode.SURVIVAL);
+		}
 		}
 	}
 
