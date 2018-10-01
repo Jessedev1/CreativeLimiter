@@ -65,8 +65,7 @@ public class Main extends JavaPlugin implements Listener {
 		getConfig().set("Deny-Placing", list);
 		saveConfig();
 
-		@SuppressWarnings("unused")
-		BukkitTask gmcheck = new GameModeChecker().runTaskTimer(this, 0, 1);
+		new GameModeChecker().runTaskTimer(this, 0, 1);
 		
 		try {
 		if (!this.getDataFolder().exists())
@@ -133,8 +132,7 @@ public class Main extends JavaPlugin implements Listener {
 
 	@Override
 	public void onDisable() {
-		while (ChangeGameMode.getBuildingPlayers().iterator().hasNext()) {
-			Player p = ChangeGameMode.getBuildingPlayers().iterator().next();
+		for (Player p: ChangeGameMode.getBuildingPlayers()) {
 			ChangeGameMode.leaveBuildMode(p);
 		}
 	}
