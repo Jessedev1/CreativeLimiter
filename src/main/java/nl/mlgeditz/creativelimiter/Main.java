@@ -132,7 +132,8 @@ public class Main extends JavaPlugin implements Listener {
 
 	@Override
 	public void onDisable() {
-		for (Player p: ChangeGameMode.getBuildingPlayers()) {
+		//New arraylist because concurrent exceptions
+		for (Player p: new ArrayList<Player>(ChangeGameMode.getBuildingPlayers())) {
 			ChangeGameMode.leaveBuildMode(p);
 		}
 	}
