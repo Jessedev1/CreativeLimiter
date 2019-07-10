@@ -2,9 +2,14 @@ package nl.mlgeditz.creativelimiter;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import nl.mlgeditz.creativelimiter.utils.Logger;
+import nl.mlgeditz.creativelimiter.utils.MemoryCache;
+import nl.mlgeditz.creativelimiter.utils.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -12,7 +17,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 import nl.mlgeditz.creativelimiter.db.Database;
 import nl.mlgeditz.creativelimiter.listeners.BreakFrameBlock;
@@ -32,16 +36,14 @@ import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
  */
 
 public class Main extends JavaPlugin implements Listener {
-
-	
-		//TODO
-		//Stop het breken van blokken die zijn geplaatst in creative.
-		//Als je rejoint of server reload dan gaan de survival items weg.
 	
 	public static Plugin pl;
+	public File messages = new File(getDataFolder(), "messages.yml");
+	public FileConfiguration messagesConfiguration = YamlConfiguration.loadConfiguration(messages);
 	private static Database thdb;
 	public static HashMap<String, String> messageData = new HashMap<String, String>();
 	public List<String> list = getConfig().getStringList("Deny-Placing");
+	private static MemoryCache cache = new MemoryCache();
 
 	public void onEnable() {
 		pl = this;
@@ -74,6 +76,14 @@ public class Main extends JavaPlugin implements Listener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		Updater.getUpdater().checkForUpdates();
+
+		if (Bukkit.getServer().getPluginManager().getPlugin("MinetopiaSDB") != null) {
+		    Logger.log(Logger.Severity.INFO, "Found MinetopiaSDB dependency. Hooking into the API...");
+        }
+
+		Logger.log(Logger.Severity.INFO, "Syncing cache with database");
+		getCache().sync();
 	}
 	
 	public static Database thdb() {
@@ -81,15 +91,12 @@ public class Main extends JavaPlugin implements Listener {
 	}
 
 	private void createConfig() {
-		File f = new File(getDataFolder() + File.separator + "messages.yml");
-		if (!f.exists()) {
+		if (!messages.exists()) {
 			try {
-				f.createNewFile();
-				Bukkit.getConsoleSender().sendMessage("De messages.yml is succesvol aangemaakt!");
+				messages.createNewFile();
+				Logger.log(Logger.Severity.INFO, "Created messages.yml succesfully!");
 			} catch (IOException e) {
-				e.printStackTrace();
-				Bukkit.getConsoleSender()
-						.sendMessage("§4Er is iets fout gegaan tijdens het genereren van de messages.yml");
+				Logger.log(Logger.Severity.ERROR, "Something went wrong while creating messages.yml Error: " + e.getMessage());
 			}
 		}
 
@@ -111,30 +118,46 @@ public class Main extends JavaPlugin implements Listener {
 		setMessage("cannotBreak", "%prefix% &cYou cannot §4Break §cThis §4Block§c!");
 		setMessage("cannotPlace", "%prefix% &cYou cannot §4Place §cThis §4Block§c!");
 
-		FileConfiguration config = YamlConfiguration.loadConfiguration(f);
-		for (String message : config.getKeys(false)) {
-			messageData.put(message, config.getString(message));
+		for (String message : messagesConfiguration.getKeys(false)) {
+			messageData.put(message, messagesConfiguration.getString(message));
 		}
 	}
 
 	private void setMessage(String name, String message) {
-		File f = new File(getDataFolder() + File.separator + "messages.yml");
-		FileConfiguration config = YamlConfiguration.loadConfiguration(f);
-		if (!config.isSet(name)) {
-			config.set(name, message);
+		if (!messagesConfiguration.isSet(name)) {
+			messagesConfiguration.set(name, message);
 			try {
-				config.save(f);
+				messagesConfiguration.save(messages);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
+	public void reloadConfigFiles() {
+		try {
+			this.reloadConfig();
+			this.messagesConfiguration.save(messages);
+		} catch (IOException e) {
+			Logger.log(Logger.Severity.ERROR, "Something went wrong while reloading files... Error: " + e.getMessage());
+		}
+	}
+
+	public static MemoryCache getCache() {
+		return Main.cache;
+	}
+
 	@Override
 	public void onDisable() {
 		//New arraylist because concurrent exceptions
-		for (Player p: new ArrayList<Player>(ChangeGameMode.getBuildingPlayers())) {
+		Logger.log(Logger.Severity.INFO, "Removing all players from buildmode...");
+		for (Player p: new ArrayList<>(ChangeGameMode.getBuildingPlayers())) {
 			ChangeGameMode.leaveBuildMode(p);
 		}
+
+		Logger.log(Logger.Severity.INFO, "Syncing cache with database");
+		getCache().sync();
+
+		Logger.log(Logger.Severity.INFO, "Disabling CreativeLimiter...");
 	}
 }

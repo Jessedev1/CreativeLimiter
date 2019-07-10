@@ -1,5 +1,6 @@
 package nl.mlgeditz.creativelimiter.listeners.block;
 
+import nl.mlgeditz.creativelimiter.utils.Logger;
 import org.bukkit.GameMode;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -32,22 +33,18 @@ public class BlockListener implements Listener {
 		String loc = x + ", " + y + ", " + z + ", " + world;
 		
 		if (p.getGameMode() == GameMode.CREATIVE) {
-		if (Main.pl.getConfig().getStringList("Deny-Placing").contains(b.getType().toString().toUpperCase())) {
-			if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.place")) {
-			e.setCancelled(true);
-			p.sendMessage(Main.messageData.get("cannotPlace").replaceAll("&", "§").replaceAll("%prefix%",
-					Main.messageData.get("Prefix").replaceAll("&", "§")));
-
-		}
-		}
-		}
-		try {
-			if (p.getGameMode() == GameMode.CREATIVE) {
-			Main.thdb().getNewStatement().executeUpdate("INSERT INTO block VALUES ('" + loc + "')");
+			if (Main.pl.getConfig().getStringList("Deny-Placing").contains(b.getType().toString().toUpperCase())) {
+				if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.place")) {
+					e.setCancelled(true);
+					p.sendMessage(Logger.prefixFormat(Main.messageData.get("cannotPlace")));
+				}
 			}
-		} catch (Exception ex) {
 		}
-		
+
+		if (p.getGameMode() == GameMode.CREATIVE) {
+			Main.getCache().add(loc, "LOCATION");
+//			Main.thdb().getNewStatement().executeUpdate("INSERT INTO block VALUES ('" + loc + "')");
+		}
 	}
 	
 	@EventHandler
@@ -60,16 +57,16 @@ public class BlockListener implements Listener {
 		String world = b.getLocation().getWorld().getName();
 		String loc = x + ", " + y + ", " + z + ", " + world;
 		try {
-		if (Main.thdb().getNewStatement().executeQuery("SELECT * FROM block WHERE loc='" + loc + "'").next()) {
-			if (p.getGameMode() != GameMode.CREATIVE) {
-				if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.break")) {
-			e.setCancelled(true);
-			p.sendMessage(Main.messageData.get("cannotBreak").replaceAll("&", "§").replaceAll("%prefix%",
-					Main.messageData.get("Prefix").replaceAll("&", "§")));
+			if (Main.getCache().get(loc) != null) {
+				if (p.getGameMode() != GameMode.CREATIVE) {
+					if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.break")) {
+						p.sendMessage(Logger.prefixFormat(Main.messageData.get("cannotBreak")));
+						e.setCancelled(true);
+					}
+				}
 			}
-			}
-		}
 		} catch (Exception ex) {
+			Logger.log(Logger.Severity.ERROR, "Something went wrong while loading block from database... Error: " + ex.getMessage());
 		}
 	}
 

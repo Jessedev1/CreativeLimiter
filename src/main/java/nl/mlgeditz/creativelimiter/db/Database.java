@@ -23,14 +23,21 @@ public class Database {
 			c = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getPath());
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		getNewStatement().executeUpdate("CREATE TABLE IF NOT EXISTS block (loc VARCHAR(255) NOT NULL default '')");
+		getNewStatement().executeUpdate("pragma busy_timeout=30000");
 	}
 	
 	public Statement getNewStatement() throws SQLException {
 		return c.createStatement();
+	}
+
+	public Connection getConnection() {
+		return c;
+	}
+
+	public void close() throws SQLException {
+		c.close();
 	}
 
 }

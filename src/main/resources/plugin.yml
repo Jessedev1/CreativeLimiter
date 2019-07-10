@@ -1,0 +1,11 @@
+name: CreativeLimiter
+version: 2.0.1
+authors: [MLGEditz, MrWouter]
+website: http://www.mlgeditz.nl
+main: nl.mlgeditz.creativelimiter.Main
+description: An easy to use plugin to handle staff abuse
+
+commands:
+  creativelimiter:
+    description: Main command
+    aliases: [cc, limiter, climiter]

@@ -1,5 +1,6 @@
 package nl.mlgeditz.creativelimiter.listeners.blocks;
 
+import nl.mlgeditz.creativelimiter.utils.Logger;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,12 +23,9 @@ public class DropItems implements Listener {
 		Player p = e.getPlayer();
 		if (ChangeGameMode.getBuildingPlayers().contains(p)) {
 			if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.drop")) {
-			e.setCancelled(true);
-			p.sendMessage(Main.messageData.get("noDrops")
-					.replaceAll("&", "§")
-					.replaceAll("%prefix%", Main.messageData.get("Prefix")
-									        .replaceAll("&", "§")));
-		}
+				e.setCancelled(true);
+				p.sendMessage(Logger.prefixFormat(Main.messageData.get("noDrops")));
+			}
 		}
 	}
 }

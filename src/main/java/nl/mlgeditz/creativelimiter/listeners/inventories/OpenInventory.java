@@ -3,7 +3,6 @@ package nl.mlgeditz.creativelimiter.listeners.inventories;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.block.Beacon;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
@@ -23,7 +22,10 @@ import org.bukkit.plugin.Plugin;
 
 import nl.mlgeditz.creativelimiter.Main;
 import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
-import wouter.is.cool.DataType;
+import nl.mlgeditz.creativelimiter.utils.XMaterial;
+
+import nl.minetopiasdb.api.API;
+import nl.minetopiasdb.api.enums.DataType;
 
 /**
  * Created by MLGEditz and/or other contributors No part of this publication may
@@ -71,7 +73,7 @@ public class OpenInventory implements Listener {
 				e.setCancelled(true);
 				p.sendMessage(Main.messageData.get("openDispenser").replaceAll("&", "§").replaceAll("%prefix%",
 						Main.messageData.get("Prefix").replaceAll("&", "§")));
-			} else if (e.getInventory().getTitle().equals(wouter.is.cool.API.getFile(DataType.MESSAGE).getString("SDB.Type.Titel").replaceAll("&", "§"))) {
+			} else if (e.getView().getTitle().equals(API.getFile(DataType.MESSAGE).getString("SDB.Type.Titel").replaceAll("&", "§"))) {
 				e.setCancelled(true);
 				p.sendMessage(Main.messageData.get("openPin").replaceAll("&", "§").replaceAll("%prefix%",
 						Main.messageData.get("Prefix").replaceAll("&", "§")));
@@ -80,7 +82,6 @@ public class OpenInventory implements Listener {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
@@ -90,20 +91,20 @@ public class OpenInventory implements Listener {
 		if (b == null) {
 			return;
 		}
-		if (b.getType() == Material.ENCHANTMENT_TABLE) {
+		if (b.getType() == XMaterial.ENCHANTING_TABLE.parseMaterial()) {
 			e.setCancelled(true);
 			p.sendMessage(Main.messageData.get("openEnchantingTable").replaceAll("&", "§").replaceAll("%prefix%",
 					Main.messageData.get("Prefix").replaceAll("&", "§")));
-		} else if (b.getType() == Material.BEACON) {
+		} else if (b.getType() == XMaterial.BEACON.parseMaterial()) {
 			e.setCancelled(true);
 			p.sendMessage(Main.messageData.get("openBeacon").replaceAll("&", "§").replaceAll("%prefix%",
 					Main.messageData.get("Prefix").replaceAll("&", "§")));
-		} else if (p.getItemInHand().getType() == Material.CARROT_STICK) {
+		} else if (p.getItemInHand().getType() == XMaterial.CARROT_ON_A_STICK.parseMaterial()) {
 			p.sendMessage(Main.messageData.get("openRugzak").replaceAll("&", "§").replaceAll("%prefix%",
 					Main.messageData.get("Prefix").replaceAll("&", "§")));
 			p.closeInventory();
 			e.setCancelled(true);
-		} else if (b.getType() == Material.RED_SANDSTONE_STAIRS) {
+		} else if (b.getType() == XMaterial.RED_SANDSTONE_STAIRS.parseMaterial()) {
 			if (!cd.contains(p)) {
 				cd.add(p);
 				Bukkit.getScheduler().scheduleAsyncDelayedTask((Plugin) Main.pl, new Runnable() {
