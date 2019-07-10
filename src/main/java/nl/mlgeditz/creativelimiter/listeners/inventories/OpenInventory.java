@@ -87,7 +87,9 @@ public class OpenInventory implements Listener {
 		Block b = e.getClickedBlock();
 		if (ChangeGameMode.getBuildingPlayers().contains(p)) {
 			if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.openinv")) {
-
+		if (b == null) {
+			return;
+		}
 		if (b.getType() == Material.ENCHANTMENT_TABLE) {
 			e.setCancelled(true);
 			p.sendMessage(Main.messageData.get("openEnchantingTable").replaceAll("&", "§").replaceAll("%prefix%",
