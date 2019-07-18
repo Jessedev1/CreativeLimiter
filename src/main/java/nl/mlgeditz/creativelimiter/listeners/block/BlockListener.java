@@ -12,6 +12,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import nl.mlgeditz.creativelimiter.Main;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
+import org.bukkit.event.player.PlayerBucketEvent;
 
 /**
  * Created by MLGEditz and/or other contributors
@@ -45,6 +47,19 @@ public class BlockListener implements Listener {
 
 		if (p.getGameMode() == GameMode.CREATIVE) {
 			Main.getCache().add(loc, "LOCATION");
+		}
+	}
+
+	@EventHandler
+	public void onPlayerBucketEmpty(PlayerBucketEmptyEvent e) {
+		Player p = e.getPlayer();
+		if (p.getGameMode() == GameMode.CREATIVE) {
+			if (Main.pl.getConfig().getStringList("Deny-Placing").contains(e.getBucket().toString().toUpperCase())) {
+				if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.place")) {
+					e.setCancelled(true);
+					p.sendMessage(Logger.prefixFormat(Main.messageData.get("cannotPlace")));
+				}
+			}
 		}
 	}
 	

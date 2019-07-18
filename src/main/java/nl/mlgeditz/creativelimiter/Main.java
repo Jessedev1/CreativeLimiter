@@ -37,7 +37,6 @@ import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
 public class Main extends JavaPlugin implements Listener {
 	
 	public static Plugin pl;
-	public static File messages;
 	public static FileConfiguration messagesConfiguration;
 	private static Database thdb;
 	public static HashMap<String, String> messageData = new HashMap<String, String>();
@@ -58,6 +57,8 @@ public class Main extends JavaPlugin implements Listener {
 		FileManager messages = new FileManager("messages.yml");
 		messages.createFile();
 		messages.add("Prefix", "&8[&7CreativeLimiter&8]");
+		messages.add("noPlayer", "%prefix% &cYou have to be a Player &cfor this");
+		messages.add("noBlock", "%prefix% &cYou have to look at an block to do this");
 		messages.add("noPermissions", "%prefix% &cYou do not have &4permission &cfor this");
 		messages.add("noDrops", "%prefix% &cYou cannot drop items in &4creative &cmode");
 		messages.add("noPickups", "%prefix% &cYou cannot pickup items in &4creative &cmode");
@@ -123,12 +124,13 @@ public class Main extends JavaPlugin implements Listener {
 	}
 
 	public static void reloadConfigFiles() {
-		try {
+			FileManager messages = new FileManager("messages.yml");
+			messageData.clear();
 			Main.pl.reloadConfig();
-			messagesConfiguration.save(messages);
-		} catch (IOException e) {
-			Logger.log(Logger.Severity.ERROR, "Something went wrong while reloading files... Error: " + e.getMessage());
-		}
+
+			for (String message : messages.getFile().getKeys(false)) {
+				messageData.put(message, messages.getFile().getString(message));
+			}
 	}
 
 	public static MemoryCache getCache() {
