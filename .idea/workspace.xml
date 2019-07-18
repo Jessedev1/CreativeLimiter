@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="613bd384-1f63-4a7d-9e1b-cfe0cc328879" name="Default Changelist" comment="" />
+    <list default="true" id="613bd384-1f63-4a7d-9e1b-cfe0cc328879" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/commands/CreativeLimiter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/commands/CreativeLimiter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/block/BlockListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/block/BlockListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/inventories/OpenInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/inventories/OpenInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/MemoryCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/MemoryCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CreativeLimiter-2.0.1-shaded.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CreativeLimiter-2.0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/commands/CreativeLimiter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/commands/CreativeLimiter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/listeners/block/BlockListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/listeners/block/BlockListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/listeners/frames/ItemFrameLimiter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/listeners/frames/ItemFrameLimiter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/listeners/inventories/OpenInventory$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/listeners/inventories/OpenInventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/listeners/inventories/OpenInventory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/utils/MemoryCache$CacheObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/utils/MemoryCache$CacheObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/utils/MemoryCache.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/utils/MemoryCache.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/nl/mlgeditz/creativelimiter/utils/XMaterial.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-CreativeLimiter-2.0.1.jar" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,16 +51,18 @@
     <select />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="CreativeLimiter" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/block/BlockListener.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/XMaterial.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="64" column="21" selection-start-line="64" selection-start-column="21" selection-end-line="64" selection-end-column="21" />
+            <state relative-caret-position="112">
+              <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -45,13 +73,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
+            <state relative-caret-position="2548">
+              <caret line="117" column="26" selection-start-line="117" selection-start-column="26" selection-end-line="117" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3526#3527#0" expanded="true" />
-                <element signature="e#3544#3545#0" expanded="true" />
-                <element signature="e#6030#6031#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/block/BlockListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="712">
+              <caret line="71" column="5" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,14 +97,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/MemoryCache.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1119">
-              <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+            <state relative-caret-position="392">
+              <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1441#1442#0" expanded="true" />
-                <element signature="e#1656#1657#0" expanded="true" />
-                <element signature="e#1682#1683#0" expanded="true" />
-                <element signature="e#1738#1739#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -76,8 +109,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/Updater.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
+            <state relative-caret-position="2548">
+              <caret line="105" column="35" selection-start-line="105" selection-start-column="35" selection-end-line="105" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,13 +119,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/db/Database.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/config/FileManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="27" column="69" selection-start-line="27" selection-start-column="69" selection-end-line="27" selection-end-column="69" />
+            <state relative-caret-position="1400">
+              <caret line="64" column="47" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
               <folding>
-                <element signature="e#927#928#0" expanded="true" />
-                <element signature="e#939#940#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1948#1949#0" expanded="true" />
+                <element signature="e#2002#2003#0" expanded="true" />
+                <element signature="e#2040#2041#0" expanded="true" />
+                <element signature="e#2089#2090#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/inventories/OpenInventory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2128">
+              <caret line="96" column="37" selection-start-line="96" selection-start-column="37" selection-end-line="96" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -101,8 +149,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/Logger.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="504">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -133,26 +181,35 @@
       <find>Parkour</find>
       <find>getConnection</find>
       <find>Database</find>
+      <find>list</find>
+      <find>Jukebox</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/XMaterial.java" />
         <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/Updater.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/commands/CreativeLimiter.java" />
         <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/frames/ItemFrameLimiter.java" />
         <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/manager/InventoryManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/plugin.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/inventories/OpenInventory.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/Cache.java" />
         <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/blocks/DropItems.java" />
         <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/blocks/PickupItems.java" />
         <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/db/Database.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/MemoryCache.java" />
-        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/Logger.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/MemoryCache.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/commands/CreativeLimiter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/config/FileManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/inventories/OpenInventory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/block/test.json" />
+        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/data/MaterialData.java" />
+        <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/block/BlockListener.java" />
       </list>
     </option>
@@ -188,14 +245,15 @@
     <option name="width" value="1938" />
     <option name="height" value="1048" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -236,7 +294,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="creativelimiter" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CreativeLimiter" type="b2602c69:ProjectViewProjectNode" />
@@ -280,6 +338,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -288,8 +347,11 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/MinetopiaSDB.jar!/" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -353,27 +415,26 @@
       <option name="presentableId" value="Default" />
       <updated>1562782279480</updated>
       <workItem from="1562782283361" duration="10684000" />
+      <workItem from="1562839065950" duration="3254000" />
+      <workItem from="1563277044038" duration="1804000" />
+      <workItem from="1563450210469" duration="4969000" />
+      <workItem from="1563473285775" duration="11000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10684000" />
+    <option name="totallyTimeSpent" value="20722000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14179105" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4994641" visible="true" weight="0.14818764" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.3290461" />
-      <window_info anchor="bottom" id="Event Log" sideWeight="0.50053304" side_tool="true" weight="0.39121115" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.5005359" side_tool="true" weight="0.1433902" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.39121115" />
@@ -381,38 +442,26 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" visible="true" weight="0.1098081" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Database" weight="0.32995737" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3290461" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50053304" side_tool="true" weight="0.39121115" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="right" id="Maven" order="5" visible="true" weight="0.1098081" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Database" order="8" weight="0.32995737" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/XMaterial.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="872" column="5" lean-forward="true" selection-start-line="872" selection-start-column="5" selection-end-line="872" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/commands/CreativeLimiter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/BreakFrameBlock.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -453,20 +502,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="87" column="37" lean-forward="true" selection-start-line="87" selection-start-column="37" selection-end-line="87" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/blocks/DropItems.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="532">
@@ -491,20 +526,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/inventories/OpenInventory.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1679">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="28">
+          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/Updater.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/commands/CreativeLimiter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="1428">
+          <caret line="58" column="29" selection-start-line="58" selection-start-column="29" selection-end-line="58" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -513,46 +545,88 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/db/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
+        <state relative-caret-position="644">
           <caret line="27" column="69" selection-start-line="27" selection-start-column="69" selection-end-line="27" selection-end-column="69" />
-          <folding>
-            <element signature="e#927#928#0" expanded="true" />
-            <element signature="e#939#940#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/MemoryCache.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/block/test.json" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/data/MaterialData.java" />
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1119">
-          <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+        <state relative-caret-position="392">
+          <caret line="32" column="20" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/XMaterial.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1441#1442#0" expanded="true" />
-            <element signature="e#1656#1657#0" expanded="true" />
-            <element signature="e#1682#1683#0" expanded="true" />
-            <element signature="e#1738#1739#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="48" column="18" selection-start-line="48" selection-start-column="18" selection-end-line="48" selection-end-column="18" />
+        <state relative-caret-position="2548">
+          <caret line="117" column="26" selection-start-line="117" selection-start-column="26" selection-end-line="117" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3526#3527#0" expanded="true" />
-            <element signature="e#3544#3545#0" expanded="true" />
-            <element signature="e#6030#6031#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/MemoryCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/Updater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2548">
+          <caret line="105" column="35" selection-start-line="105" selection-start-column="35" selection-end-line="105" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/config/FileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1400">
+          <caret line="64" column="47" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1948#1949#0" expanded="true" />
+            <element signature="e#2002#2003#0" expanded="true" />
+            <element signature="e#2040#2041#0" expanded="true" />
+            <element signature="e#2089#2090#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/inventories/OpenInventory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2128">
+          <caret line="96" column="37" selection-start-line="96" selection-start-column="37" selection-end-line="96" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/utils/Logger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="504">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -561,8 +635,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/nl/mlgeditz/creativelimiter/listeners/block/BlockListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="64" column="21" selection-start-line="64" selection-start-column="21" selection-end-line="64" selection-end-column="21" />
+        <state relative-caret-position="712">
+          <caret line="71" column="5" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

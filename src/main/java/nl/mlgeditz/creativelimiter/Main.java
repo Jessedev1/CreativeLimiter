@@ -2,17 +2,16 @@ package nl.mlgeditz.creativelimiter;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
+import nl.mlgeditz.creativelimiter.commands.CreativeLimiter;
+import nl.mlgeditz.creativelimiter.config.FileManager;
 import nl.mlgeditz.creativelimiter.utils.Logger;
 import nl.mlgeditz.creativelimiter.utils.MemoryCache;
 import nl.mlgeditz.creativelimiter.utils.Updater;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -38,11 +37,11 @@ import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
 public class Main extends JavaPlugin implements Listener {
 	
 	public static Plugin pl;
-	public File messages = new File(getDataFolder(), "messages.yml");
-	public FileConfiguration messagesConfiguration = YamlConfiguration.loadConfiguration(messages);
+	public static File messages;
+	public static FileConfiguration messagesConfiguration;
 	private static Database thdb;
 	public static HashMap<String, String> messageData = new HashMap<String, String>();
-	public List<String> list = getConfig().getStringList("Deny-Placing");
+	public static boolean MinetopiaSDB = false;
 	private static MemoryCache cache = new MemoryCache();
 
 	public void onEnable() {
@@ -54,8 +53,40 @@ public class Main extends JavaPlugin implements Listener {
 		Bukkit.getPluginManager().registerEvents(new BreakFrameBlock(), this);
 		Bukkit.getPluginManager().registerEvents(new LeaveListener(), this);
 		Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
-		createConfig();
-		
+		getCommand("creativelimiter").setExecutor(new CreativeLimiter());
+
+		FileManager messages = new FileManager("messages.yml");
+		messages.createFile();
+		messages.add("Prefix", "&8[&7CreativeLimiter&8]");
+		messages.add("noPermissions", "%prefix% &cYou do not have &4permission &cfor this");
+		messages.add("noDrops", "%prefix% &cYou cannot drop items in &4creative &cmode");
+		messages.add("noPickups", "%prefix% &cYou cannot pickup items in &4creative &cmode");
+		messages.add("dontTakeItem", "%prefix% &cYou are not allowed to pickup items created in &4creative &cmode");
+		messages.add("openChest", "%prefix% &cYou cannot open an &4Chest &cIn &4Creative &cMode!");
+		messages.add("openHopper", "%prefix% &cYou cannot open an &4Hopper &cin &4Creative &cMode!");
+		messages.add("openDropper", "%prefix% &cYou cannot open an &4Dropper &cin &4Creative &cMode!");
+		messages.add("openFurnace", "%prefix% &cYou cannot open an &4Furnace &cin &4Creative &cMode!");
+		messages.add("openEnchantingTable", "%prefix% &cYou cannot open an &4Enchanting Table &cin &4Creative &cMode!");
+		messages.add("openBeacon", "%prefix% &cYou cannot open an &4Beacon &cin &4Creative &cMode!");
+		messages.add("openShulker", "%prefix% &cYou cannot open an &4Shulker &cin &4Creative &cMode!");
+		messages.add("openDispenser", "%prefix% &cYou cannot open an &4Dispenser &cin &4Creative &cMode!");
+		messages.add("openJukebox", "%prefix% &cYou cannot interact with a &4Jukebox &cin &4Creative &cMode!");
+		messages.add("openArmorStand", "%prefix% &cYou cannot interact with an &4Armor Stand &cin &4Creative &cMode!");
+		messages.add("openCraftingTable", "%prefix% &cYou cannot open an &4Crafting Table &cin &4Creative &cMode!");
+		messages.add("openBrewingStand", "%prefix% &cYou cannot open an &4Brewing Stand &cin &4Creative &cMode!");
+		messages.add("openPin", "%prefix% &cYou cannot open an &4Safety Deposit Box &cin &4Creative &cMode!");
+		messages.add("openRugzak", "%prefix% &cYou cannot open an &4Backpack &cin &4Creative &cMode!");
+		messages.add("cannotBreak", "%prefix% &cYou cannot §4Break §cThis §4Block§c!");
+		messages.add("cannotPlace", "%prefix% &cYou cannot §4Place §cThis §4Block§c!");
+		messages.save();
+
+		for (String message : messages.getFile().getKeys(false)) {
+			messageData.put(message, messages.getFile().getString(message));
+		}
+
+		FileManager config = new FileManager("config.yml");
+		config.createFile();
+		ArrayList<String> list = new ArrayList<>();
 		list.add("DIAMOND_BLOCK");
 		list.add("GOLD_BLOCK");
 		list.add("IRON_BLOCK");
@@ -64,8 +95,8 @@ public class Main extends JavaPlugin implements Listener {
 		list.add("GOLD_ORE");
 		list.add("EMERALD_ORE");
 		list.add("IRON_ORE");
-		getConfig().set("Deny-Placing", list);
-		saveConfig();
+		config.write("Deny-Placing", list);
+		config.save();
 
 		new GameModeChecker().runTaskTimer(this, 0, 1);
 		
@@ -80,6 +111,7 @@ public class Main extends JavaPlugin implements Listener {
 
 		if (Bukkit.getServer().getPluginManager().getPlugin("MinetopiaSDB") != null) {
 		    Logger.log(Logger.Severity.INFO, "Found MinetopiaSDB dependency. Hooking into the API...");
+			MinetopiaSDB = true;
         }
 
 		Logger.log(Logger.Severity.INFO, "Syncing cache with database");
@@ -90,54 +122,10 @@ public class Main extends JavaPlugin implements Listener {
 		return thdb;
 	}
 
-	private void createConfig() {
-		if (!messages.exists()) {
-			try {
-				messages.createNewFile();
-				Logger.log(Logger.Severity.INFO, "Created messages.yml succesfully!");
-			} catch (IOException e) {
-				Logger.log(Logger.Severity.ERROR, "Something went wrong while creating messages.yml Error: " + e.getMessage());
-			}
-		}
-
-		setMessage("Prefix", "&8[&7CreativeLimiter&8]");
-		setMessage("noPermissions", "%prefix% &cYou do not have &4permission &cfor this");
-		setMessage("noDrops", "%prefix% &cYou cannot drop items in &4creative &cmode");
-		setMessage("noPickups", "%prefix% &cYou cannot pickup items in &4creative &cmode");
-		setMessage("dontTakeItem", "%prefix% &cYou are not allowed to pickup items created in &4creative &cmode");
-		setMessage("openChest", "%prefix% &cYou cannot open an &4Chest &cIn &4Creative &cMode!");
-		setMessage("openHopper", "%prefix% &cYou cannot open an &4Hopper &cin &4Creative &cMode!");
-		setMessage("openDropper", "%prefix% &cYou cannot open an &4Dropper &cin &4Creative &cMode!");
-		setMessage("openFurnance", "%prefix% &cYou cannot open an &4Furnance &cin &4Creative &cMode!");
-		setMessage("openEnchantingTable", "%prefix% &cYou cannot open an &4Enchanting Table &cin &4Creative &cMode!");
-		setMessage("openBeacon", "%prefix% &cYou cannot open an &4Beacon &cin &4Creative &cMode!");
-		setMessage("openShulker", "%prefix% &cYou cannot open an &4Shulker &cin &4Creative &cMode!");
-		setMessage("openDispenser", "%prefix% &cYou cannot open an &4Dispenser &cin &4Creative &cMode!");
-		setMessage("openPin", "%prefix% &cYou cannot open an &4Safesty Deposit Box &cin &4Creative &cMode!");
-		setMessage("openRugzak", "%prefix% &cYou cannot open an &4Backpack &cin &4Creative &cMode!");
-		setMessage("cannotBreak", "%prefix% &cYou cannot §4Break §cThis §4Block§c!");
-		setMessage("cannotPlace", "%prefix% &cYou cannot §4Place §cThis §4Block§c!");
-
-		for (String message : messagesConfiguration.getKeys(false)) {
-			messageData.put(message, messagesConfiguration.getString(message));
-		}
-	}
-
-	private void setMessage(String name, String message) {
-		if (!messagesConfiguration.isSet(name)) {
-			messagesConfiguration.set(name, message);
-			try {
-				messagesConfiguration.save(messages);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public void reloadConfigFiles() {
+	public static void reloadConfigFiles() {
 		try {
-			this.reloadConfig();
-			this.messagesConfiguration.save(messages);
+			Main.pl.reloadConfig();
+			messagesConfiguration.save(messages);
 		} catch (IOException e) {
 			Logger.log(Logger.Severity.ERROR, "Something went wrong while reloading files... Error: " + e.getMessage());
 		}
@@ -152,7 +140,7 @@ public class Main extends JavaPlugin implements Listener {
 		//New arraylist because concurrent exceptions
 		Logger.log(Logger.Severity.INFO, "Removing all players from buildmode...");
 		for (Player p: new ArrayList<>(ChangeGameMode.getBuildingPlayers())) {
-			ChangeGameMode.leaveBuildMode(p);
+			if (ChangeGameMode.getBuildingPlayers().contains(p)) ChangeGameMode.leaveBuildMode(p);
 		}
 
 		Logger.log(Logger.Severity.INFO, "Syncing cache with database");

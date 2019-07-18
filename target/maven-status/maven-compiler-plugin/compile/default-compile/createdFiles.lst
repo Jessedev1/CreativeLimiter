@@ -1,8 +1,8 @@
 nl\mlgeditz\creativelimiter\Main.class
 nl\mlgeditz\creativelimiter\manager\InventoryManager.class
+nl\mlgeditz\creativelimiter\config\FileManager.class
 nl\mlgeditz\creativelimiter\utils\MemoryCache.class
 nl\mlgeditz\creativelimiter\utils\Updater$Update.class
-nl\mlgeditz\creativelimiter\listeners\inventories\OpenInventory$1.class
 nl\mlgeditz\creativelimiter\listeners\LeaveListener.class
 nl\mlgeditz\creativelimiter\listeners\BreakFrameBlock.class
 nl\mlgeditz\creativelimiter\utils\Logger.class

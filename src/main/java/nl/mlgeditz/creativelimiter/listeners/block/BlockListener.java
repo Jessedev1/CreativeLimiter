@@ -1,7 +1,9 @@
 package nl.mlgeditz.creativelimiter.listeners.block;
 
 import nl.mlgeditz.creativelimiter.utils.Logger;
+import nl.mlgeditz.creativelimiter.utils.XMaterial;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -43,7 +45,6 @@ public class BlockListener implements Listener {
 
 		if (p.getGameMode() == GameMode.CREATIVE) {
 			Main.getCache().add(loc, "LOCATION");
-//			Main.thdb().getNewStatement().executeUpdate("INSERT INTO block VALUES ('" + loc + "')");
 		}
 	}
 	
@@ -69,5 +70,4 @@ public class BlockListener implements Listener {
 			Logger.log(Logger.Severity.ERROR, "Something went wrong while loading block from database... Error: " + ex.getMessage());
 		}
 	}
-
 }

@@ -24,7 +24,7 @@ public class MemoryCache {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     Thread.sleep(SYNC_PERIOD_IN_MINUTES * 60000);
-                    update();
+                    sync();
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -77,7 +77,6 @@ public class MemoryCache {
                 Logger.log(Logger.Severity.ERROR, "Something went wrong while syncing data from cache to the database! Error: " + e.getMessage());
             }
         }
-
         this.clear();
 
         //Sync from database to cache
@@ -89,25 +88,6 @@ public class MemoryCache {
             }
         } catch (SQLException e) {
             Logger.log(Logger.Severity.ERROR, "Something went wrong while syncing data from the database to cache! Error: " + e.getMessage());
-        }
-    }
-
-    public void update() {
-        if (size() > 0) {
-            //Sync from cache to database
-            try {
-                Iterator it = cache.entrySet().iterator();
-                ArrayList<String> currentData = getDatabaseStorage();
-                while (it.hasNext()) {
-                    Map.Entry pair = (Map.Entry) it.next();
-                    if (!currentData.contains(pair.getKey().toString())) {
-                        Main.thdb().getNewStatement().executeUpdate("INSERT INTO block VALUES ('" + pair.getKey() + "')");
-                    }
-                }
-                this.clear();
-            } catch (SQLException e) {
-                Logger.log(Logger.Severity.ERROR, "Something went wrong while syncing data from cache to the database! Error: " + e.getMessage());
-            }
         }
     }
 
