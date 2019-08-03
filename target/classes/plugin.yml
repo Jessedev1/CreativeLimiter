@@ -2,10 +2,10 @@ name: CreativeLimiter
 version: 2.7
 authors: [MLGEditz, MrWouter]
 website: http://www.mlgeditz.nl
-main: nl.mlgeditz.creativelimiter.Main
+main: nl.mlgeditz.creativelimiter.CreativeLimiter
 description: An easy to use plugin to handle staff abuse
 
 commands:
   creativelimiter:
-    description: Main command
+    description: CreativeLimiter command
     aliases: [cc, limiter, climiter]

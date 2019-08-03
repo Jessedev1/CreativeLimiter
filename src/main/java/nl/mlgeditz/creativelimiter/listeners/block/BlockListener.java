@@ -1,13 +1,10 @@
 package nl.mlgeditz.creativelimiter.listeners.block;
 
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
 import nl.mlgeditz.creativelimiter.utils.Logger;
-import nl.mlgeditz.creativelimiter.utils.XMaterial;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,15 +13,9 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import nl.mlgeditz.creativelimiter.Main;
-import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
-import org.bukkit.event.player.PlayerBucketEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-
-import java.util.*;
 
 /**
  * Created by MLGEditz and/or other contributors
@@ -48,16 +39,16 @@ public class BlockListener implements Listener {
 		String loc = x + ", " + y + ", " + z + ", " + world;
 
 		if (p.getGameMode() == GameMode.CREATIVE) {
-			if (Main.pl.getConfig().getStringList("Deny-Placing").contains(b.getType().toString().toUpperCase())) {
+			if (CreativeLimiter.getAPI().isPlaceBlocker(b.getType().toString().toUpperCase())) {
 				if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.place")) {
 					e.setCancelled(true);
-					p.sendMessage(Logger.prefixFormat(Main.messageData.get("cannotPlace")));
+					p.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("cannotPlace")));
 				}
 			}
 		}
 
 		if (p.getGameMode() == GameMode.CREATIVE) {
-			Main.getCache().add(loc, "LOCATION");
+			CreativeLimiter.getCache().add(loc, "LOCATION");
 		}
 	}
 
@@ -65,10 +56,10 @@ public class BlockListener implements Listener {
 	public void onPlayerBucketEmpty(PlayerBucketEmptyEvent e) {
 		Player p = e.getPlayer();
 		if (p.getGameMode() == GameMode.CREATIVE) {
-			if (Main.pl.getConfig().getStringList("Deny-Placing").contains(e.getBucket().toString().toUpperCase())) {
+			if (CreativeLimiter.getAPI().isPlaceBlocker(e.getBucket().toString().toUpperCase())) {
 				if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.place")) {
 					e.setCancelled(true);
-					p.sendMessage(Logger.prefixFormat(Main.messageData.get("cannotPlace")));
+					p.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("cannotPlace")));
 				}
 			}
 		}
@@ -79,10 +70,10 @@ public class BlockListener implements Listener {
 		Player p = e.getPlayer();
 		if (e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 		if (p.getGameMode() == GameMode.CREATIVE) {
-			if (Main.pl.getConfig().getStringList("Deny-Placing").contains(p.getInventory().getItemInMainHand().getType().toString().toUpperCase())) {
+			if (CreativeLimiter.getAPI().isPlaceBlocker(p.getInventory().getItemInHand().getType().toString().toUpperCase())) {
 				if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.place")) {
 					e.setCancelled(true);
-					p.sendMessage(Logger.prefixFormat(Main.messageData.get("cannotPlace")));
+					p.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("cannotPlace")));
 				}
 			}
 		}
@@ -95,10 +86,33 @@ public class BlockListener implements Listener {
 		String world = location.getWorld().getName();
 		String loc = x + ", " + y + ", " + z + ", " + world;
 
-		p.sendMessage(loc);
-
 		if (p.getGameMode() == GameMode.CREATIVE) {
-			Main.getCache().add(loc, "LOCATION");
+			CreativeLimiter.getCache().add(loc, "LOCATION");
+		}
+	}
+
+	@EventHandler
+	public void onItemBreak(EntityDamageByEntityEvent e) {
+		if (!(e.getDamager() instanceof Player)) return;
+		Player p = (Player) e.getDamager();
+		Entity entity = e.getEntity();
+		int x = entity.getLocation().getBlockX();
+		int y = entity.getLocation().getBlockY();
+		int z = entity.getLocation().getBlockZ();
+		String world = entity.getLocation().getWorld().getName();
+		String loc = x + ", " + y + ", " + z + ", " + world;
+
+		try {
+			if (CreativeLimiter.getCache().get(loc) != null) {
+				if (p.getGameMode() != GameMode.CREATIVE) {
+					if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.break")) {
+						p.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("cannotBreak")));
+						e.setCancelled(true);
+					}
+				}
+			}
+		} catch (Exception ex) {
+			Logger.log(Logger.Severity.ERROR, "Something went wrong while loading block from database... Error: " + ex.getMessage());
 		}
 	}
 	
@@ -111,11 +125,12 @@ public class BlockListener implements Listener {
 		int z = b.getLocation().getBlockZ();
 		String world = b.getLocation().getWorld().getName();
 		String loc = x + ", " + y + ", " + z + ", " + world;
+
 		try {
-			if (Main.getCache().get(loc) != null) {
+			if (CreativeLimiter.getCache().get(loc) != null) {
 				if (p.getGameMode() != GameMode.CREATIVE) {
 					if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.break")) {
-						p.sendMessage(Logger.prefixFormat(Main.messageData.get("cannotBreak")));
+						p.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("cannotBreak")));
 						e.setCancelled(true);
 					}
 				}

@@ -1,6 +1,6 @@
 package nl.mlgeditz.creativelimiter.config;
 
-import nl.mlgeditz.creativelimiter.Main;
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -16,12 +16,12 @@ public class FileManager {
     private FileConfiguration fileConfiguration;
 
     public FileManager (String path) {
-        file = new File(Main.pl.getDataFolder(), path);
+        file = new File(CreativeLimiter.pl.getDataFolder(), path);
         fileConfiguration = YamlConfiguration.loadConfiguration(file);
     }
 
     public void setPath(String path) {
-        file = new File(Main.pl.getDataFolder(), path);
+        file = new File(CreativeLimiter.pl.getDataFolder(), path);
         fileConfiguration = YamlConfiguration.loadConfiguration(file);
     }
 
@@ -64,7 +64,7 @@ public class FileManager {
 
     public void add(String key, Object value) {
         if (!fileConfiguration.isSet(key)) {
-            write(key, value.toString());
+            write(key, value);
         }
     }
 

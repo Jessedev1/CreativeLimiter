@@ -3,7 +3,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import nl.mlgeditz.creativelimiter.Main;
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
@@ -40,7 +40,7 @@ public class Updater {
         if (latest == null) return false;
 
         String[] version = latest.getVersion().split("\\.");
-        String[] currentVersion = Main.pl.getDescription().getVersion().split("\\.");
+        String[] currentVersion = CreativeLimiter.pl.getDescription().getVersion().split("\\.");
 
         if (version.length <= 1) return false;
 
@@ -63,7 +63,7 @@ public class Updater {
 
             if (latest.isCritical() && updateWhenCritical) {
                 Logger.log(Logger.Severity.WARNING, "Found critical update... Installing!");
-                downloadLatest(latest.getDownloadLink(), project, Main.pl);
+                downloadLatest(latest.getDownloadLink(), project, CreativeLimiter.pl);
                 Logger.log(Logger.Severity.INFO, "Installation of " + project + " v" + latest.getVersion() + " finished! Reloading server!");
                 Bukkit.getServer().reload();
             }
@@ -79,7 +79,7 @@ public class Updater {
             Update latest = getLatestUpdate();
 
             Logger.log(Logger.Severity.INFO, "Found update... Installing!");
-            downloadLatest(latest.getDownloadLink(), project, Main.pl);
+            downloadLatest(latest.getDownloadLink(), project, CreativeLimiter.pl);
 
             Logger.log(Logger.Severity.INFO, "Installation of " + project + " v" + latest.getVersion() + " finished! Reloading...");
             Bukkit.getServer().reload();

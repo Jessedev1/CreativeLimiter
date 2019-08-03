@@ -20,18 +20,18 @@ public class GameModeChecker extends BukkitRunnable {
 		for (Player all : Bukkit.getOnlinePlayers()) {
 			if (all.getGameMode() == GameMode.CREATIVE) {
 				if (!all.hasPermission("limiter.bypass") || !all.hasPermission("limiter.holdinv")) {
-				if (!ChangeGameMode.getBuildingPlayers().contains(all)) {
-					ChangeGameMode.enterBuildMode(all);
-				}
+					if (!ChangeGameMode.getBuildingPlayers().contains(all)) {
+						ChangeGameMode.enterBuildMode(all);
+					}
 				}
 			} else if (all.getGameMode() == GameMode.SURVIVAL || all.getGameMode() == GameMode.ADVENTURE) {
-				if (!all.hasPermission("limiter.bypass") || !all.hasPermission("limiter.holdinv")) {
-				if (!all.hasPermission("limiter.bypass")) {
-				if (ChangeGameMode.getBuildingPlayers().contains(all)) {
-					ChangeGameMode.leaveBuildMode(all);
-				}
-				}
-				}
+					if (!all.hasPermission("limiter.bypass") || !all.hasPermission("limiter.holdinv")) {
+						if (!all.hasPermission("limiter.bypass")) {
+							if (ChangeGameMode.getBuildingPlayers().contains(all)) {
+								ChangeGameMode.leaveBuildMode(all);
+							}
+						}
+					}
 			}
 		}
 	}

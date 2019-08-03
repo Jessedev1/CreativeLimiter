@@ -1,6 +1,7 @@
 package nl.mlgeditz.creativelimiter.commands;
 
-import nl.mlgeditz.creativelimiter.Main;
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
+import nl.mlgeditz.creativelimiter.utils.ApiSync;
 import nl.mlgeditz.creativelimiter.utils.Logger;
 import nl.mlgeditz.creativelimiter.utils.Updater;
 import org.bukkit.Material;
@@ -9,11 +10,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.io.IOException;
 import java.util.Set;
 
-public class CreativeLimiter implements CommandExecutor {
+public class CreativeLimiterCMD implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -35,15 +34,16 @@ public class CreativeLimiter implements CommandExecutor {
                 if (sender instanceof Player) {
                     Player p = (Player) sender;
                     if (p.hasPermission("limiter.reload")) {
-                        Main.reloadConfigFiles();
+                        CreativeLimiter.reloadConfigFiles();
                         p.sendMessage(Logger.prefixFormat("%prefix% &7Reloaded config files successfully!"));
                         return false;
                     } else {
-                        p.sendMessage(Logger.prefixFormat(Main.messageData.get("noPermissions")));
+                        p.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("noPermissions")));
                         return false;
                     }
                 }
-                Main.reloadConfigFiles();
+                CreativeLimiter.reloadConfigFiles();
+                ApiSync.syncConfig();
                 sender.sendMessage(Logger.prefixFormat("%prefix% &7Reloaded config files successfully!"));
                 return false;
             }
@@ -52,28 +52,28 @@ public class CreativeLimiter implements CommandExecutor {
                 if (sender instanceof Player) {
                     Player p = (Player) sender;
                     if (p.hasPermission("limiter.sync")) {
-                        Main.getCache().sync();
+                        CreativeLimiter.getCache().sync();
                         p.sendMessage(Logger.prefixFormat("%prefix% &7Synced data with database successfully!"));
                         return false;
                     } else {
-                        p.sendMessage(Logger.prefixFormat(Main.messageData.get("noPermissions")));
+                        p.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("noPermissions")));
                         return false;
                     }
                 }
-                Main.getCache().sync();
+                CreativeLimiter.getCache().sync();
                 sender.sendMessage(Logger.prefixFormat("%prefix% &7Synced data with database successfully!"));
                 return false;
             }
 
             if (args[0].equalsIgnoreCase("blockinfo")) {
                 if (!(sender instanceof Player)) {
-                    sender.sendMessage(Logger.prefixFormat(Main.messageData.get("noPlayer")));
+                    sender.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("noPlayer")));
                     return false;
                 }
                 Player p = (Player) sender;
 
                 if(!p.hasPermission("limiter.blockinfo")) {
-                    p.sendMessage(Logger.prefixFormat(Main.messageData.get("noPermissions")));
+                    p.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("noPermissions")));
                     return false;
                 }
 
@@ -84,14 +84,14 @@ public class CreativeLimiter implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("update")) {
                 if(!sender.hasPermission("limiter.blockinfo")) {
-                    sender.sendMessage(Logger.prefixFormat(Main.messageData.get("noPermissions")));
+                    sender.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("noPermissions")));
                     return false;
                 }
 
                 if (sender instanceof Player) {
                     sender.sendMessage(Logger.prefixFormat("%prefix% Checking for new updates..."));
                     if (Updater.getUpdater().checkForUpdates()) {
-                        sender.sendMessage(Logger.prefixFormat("%prefix% Found §c1 §7new update. Installing..."));
+                        sender.sendMessage(Logger.prefixFormat("%prefix% Found &c1 &7new update. Installing..."));
                         Updater.getUpdater().installUpdate();
                     } else {
                         sender.sendMessage(Logger.prefixFormat("%prefix% Could not find an update. Try again later."));

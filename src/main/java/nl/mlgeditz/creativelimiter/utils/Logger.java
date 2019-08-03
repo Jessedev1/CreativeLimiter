@@ -1,19 +1,19 @@
 package nl.mlgeditz.creativelimiter.utils;
 
-import nl.mlgeditz.creativelimiter.Main;
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 
 public class Logger {
 
-    public static ConsoleCommandSender out = Main.pl.getServer().getConsoleSender();
+    public static ConsoleCommandSender out = CreativeLimiter.pl.getServer().getConsoleSender();
 
     public static String colorFormat(String string) {
         return ChatColor.translateAlternateColorCodes('&', string);
     }
 
     public static String prefixFormat(String string) {
-        String prefix = Main.messageData.get("Prefix");
+        String prefix = CreativeLimiter.messageData.get("Prefix");
         return colorFormat(string.replaceAll("%prefix%", prefix));
     }
 
@@ -22,11 +22,11 @@ public class Logger {
     }
 
     public static void noPlayer() {
-        log(Severity.ERROR, "Dit kan enkel worden uitgevoerd door een speler.");
+        log(Severity.ERROR, "You must be a player to do this.");
     }
 
     public static String noPermission(String permission) {
-        return prefixFormat("&7Je moet de permissie §3" + permission + "§f hebben om dit uit te voeren");
+        return prefixFormat("&7You need the permission &3" + permission + "&f to do this");
     }
 
     public enum Severity {

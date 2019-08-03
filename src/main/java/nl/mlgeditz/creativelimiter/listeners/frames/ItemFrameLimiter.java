@@ -3,6 +3,8 @@ package nl.mlgeditz.creativelimiter.listeners.frames;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
+import nl.mlgeditz.creativelimiter.utils.Logger;
 import nl.mlgeditz.creativelimiter.utils.XMaterial;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ItemFrame;
@@ -16,7 +18,6 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import nl.mlgeditz.creativelimiter.Main;
 import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
 
 public class ItemFrameLimiter implements Listener {
@@ -31,11 +32,10 @@ public class ItemFrameLimiter implements Listener {
 		Entity ent = e.getRightClicked();
 		if (ent instanceof ItemFrame) {
 			if (ChangeGameMode.getBuildingPlayers().contains(p)) {
-				p.getInventory().getItemInMainHand();
-				if (p.getInventory().getItemInMainHand().getType() != XMaterial.AIR.parseMaterial()) {
+				if (p.getInventory().getItemInHand().getType() != XMaterial.AIR.parseMaterial()) {
 					ItemFrame ifr = (ItemFrame) ent;
 					e.setCancelled(true);
-					ItemStack cur = p.getInventory().getItemInMainHand();
+					ItemStack cur = p.getInventory().getItemInHand();
 					ItemMeta curm = cur.getItemMeta();
 					List<String> lore = curm != null && curm.hasLore() ? curm.getLore() : new ArrayList<>();
 					if ((lore == null || lore.isEmpty()) || !lore.contains("CreativeLimiter item.")) {
@@ -61,8 +61,7 @@ public class ItemFrameLimiter implements Listener {
 				if (lore.contains("CreativeLimiter item.")) {
 					if (!p.hasPermission("limiter.bypass") || !p.hasPermission("limiter.takeitem")) {
 					e.setCancelled(true);
-					p.sendMessage(Main.messageData.get("dontTakeItem").replaceAll("&", "§").replaceAll("%prefix%",
-							Main.messageData.get("Prefix").replaceAll("&", "§")));
+					p.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("dontTakeItem")));
 					}
 				}
 			}
