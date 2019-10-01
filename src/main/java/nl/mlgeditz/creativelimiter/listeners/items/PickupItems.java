@@ -16,6 +16,7 @@ public class PickupItems implements Listener {
 
 	private ArrayList<Player> pick = new ArrayList<>();
 
+	//Should be replaced with EntityPickupItemEvent, but is first seen in 1.12
 	@EventHandler
 	public void onPickup(PlayerPickupItemEvent e) {
 		Player p = e.getPlayer();
@@ -24,7 +25,7 @@ public class PickupItems implements Listener {
 				if (!pick.contains(p)) {
 					p.sendMessage(Logger.prefixFormat(CreativeLimiter.messageData.get("noPickups")));
 					pick.add(p);
-					Bukkit.getScheduler().scheduleAsyncDelayedTask(CreativeLimiter.pl, new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(CreativeLimiter.pl, new Runnable() {
 						public void run() {
 							pick.remove(p);
 						}

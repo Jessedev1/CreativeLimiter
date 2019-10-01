@@ -1,17 +1,18 @@
 package nl.mlgeditz.creativelimiter.utils;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import nl.mlgeditz.creativelimiter.CreativeLimiter;
-
 import java.lang.ref.SoftReference;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
 
 public class MemoryCache {
 
@@ -64,10 +65,10 @@ public class MemoryCache {
         if (size() > 0) {
             //Sync from cache to database
             try {
-                Iterator it = cache.entrySet().iterator();
+                Iterator<Entry<String, SoftReference<CacheObject>>> it = cache.entrySet().iterator();
                 ArrayList<String> currentData = getDatabaseStorage();
                 while (it.hasNext()) {
-                    Map.Entry pair = (Map.Entry) it.next();
+                    Map.Entry<String, SoftReference<CacheObject>> pair = it.next();
                     if (!currentData.contains(pair.getKey().toString())) {
                         CreativeLimiter.thdb().getNewStatement().executeUpdate("INSERT INTO block VALUES ('" + pair.getKey() + "')");
                     }
@@ -93,7 +94,7 @@ public class MemoryCache {
     public ArrayList<String> getDatabaseStorage() {
         ArrayList<String> data = new ArrayList<>();
         try {
-            ResultSet result = CreativeLimiter.thdb().getNewStatement().executeQuery("SELECT * FROM block");
+            ResultSet result = CreativeLimiter.thdb().getNewStatement().executeQuery("SELECT loc FROM block");
             while (result.next()) {
                 String location = result.getString("loc");
                 data.add(location);

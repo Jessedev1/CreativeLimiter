@@ -3,9 +3,6 @@ package nl.mlgeditz.creativelimiter.listeners.frames;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.mlgeditz.creativelimiter.CreativeLimiter;
-import nl.mlgeditz.creativelimiter.utils.Logger;
-import nl.mlgeditz.creativelimiter.utils.XMaterial;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
@@ -18,7 +15,10 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
 import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
+import nl.mlgeditz.creativelimiter.utils.Logger;
+import nl.mlgeditz.creativelimiter.utils.XMaterial;
 
 public class ItemFrameLimiter implements Listener {
 

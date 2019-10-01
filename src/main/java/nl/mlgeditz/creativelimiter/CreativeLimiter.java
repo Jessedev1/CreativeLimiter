@@ -2,34 +2,34 @@ package nl.mlgeditz.creativelimiter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
-import nl.mlgeditz.creativelimiter.api.CreativeLimiterAPI;
-import nl.mlgeditz.creativelimiter.commands.CreativeLimiterCMD;
-import nl.mlgeditz.creativelimiter.config.FileManager;
-import nl.mlgeditz.creativelimiter.listeners.inventories.interact.InventoryClick;
-import nl.mlgeditz.creativelimiter.listeners.inventories.open.OpenInventory18;
-import nl.mlgeditz.creativelimiter.utils.ApiSync;
-import nl.mlgeditz.creativelimiter.utils.Logger;
-import nl.mlgeditz.creativelimiter.utils.MemoryCache;
-import nl.mlgeditz.creativelimiter.utils.Updater;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import nl.mlgeditz.creativelimiter.api.CreativeLimiterAPI;
+import nl.mlgeditz.creativelimiter.commands.CreativeLimiterCMD;
+import nl.mlgeditz.creativelimiter.config.FileManager;
 import nl.mlgeditz.creativelimiter.db.Database;
-import nl.mlgeditz.creativelimiter.listeners.frames.BreakFrameBlock;
 import nl.mlgeditz.creativelimiter.listeners.GameModeChecker;
 import nl.mlgeditz.creativelimiter.listeners.LeaveListener;
 import nl.mlgeditz.creativelimiter.listeners.block.BlockListener;
+import nl.mlgeditz.creativelimiter.listeners.frames.BreakFrameBlock;
+import nl.mlgeditz.creativelimiter.listeners.frames.ItemFrameLimiter;
+import nl.mlgeditz.creativelimiter.listeners.inventories.interact.InventoryClick;
+import nl.mlgeditz.creativelimiter.listeners.inventories.open.OpenInventory;
+import nl.mlgeditz.creativelimiter.listeners.inventories.open.OpenInventory18;
 import nl.mlgeditz.creativelimiter.listeners.items.DropItems;
 import nl.mlgeditz.creativelimiter.listeners.items.PickupItems;
-import nl.mlgeditz.creativelimiter.listeners.frames.ItemFrameLimiter;
-import nl.mlgeditz.creativelimiter.listeners.inventories.open.OpenInventory;
 import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
+import nl.mlgeditz.creativelimiter.utils.ApiSync;
+import nl.mlgeditz.creativelimiter.utils.Logger;
+import nl.mlgeditz.creativelimiter.utils.MemoryCache;
+import nl.mlgeditz.creativelimiter.utils.Updater;
 
 /**
  * Created by MLGEditz and/or other contributors No part of this publication may
@@ -38,7 +38,7 @@ import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
  */
 
 public class CreativeLimiter extends JavaPlugin implements Listener {
-	
+
 	public static Plugin pl;
 	private static Database thdb;
 	public static HashMap<String, String> messageData = new HashMap<String, String>();
@@ -62,10 +62,10 @@ public class CreativeLimiter extends JavaPlugin implements Listener {
 		Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
 
 		if (is19orUp()) {
-		    Bukkit.getPluginManager().registerEvents(new OpenInventory(), this);
-        } else {
-            Bukkit.getPluginManager().registerEvents(new OpenInventory18(), this);
-        }
+			Bukkit.getPluginManager().registerEvents(new OpenInventory(), this);
+		} else {
+			Bukkit.getPluginManager().registerEvents(new OpenInventory18(), this);
+		}
 
 		getCommand("creativelimiter").setExecutor(new CreativeLimiterCMD());
 
@@ -103,53 +103,26 @@ public class CreativeLimiter extends JavaPlugin implements Listener {
 
 		FileManager config = new FileManager("config.yml");
 		config.createFile();
-		ArrayList<String> denyPlacing = new ArrayList<>();
-		denyPlacing.add("COAL_BLOCK");
-		denyPlacing.add("COAL_ORE");
-		denyPlacing.add("REDSTONE");
-		denyPlacing.add("REDSTONE_BLOCK");
-		denyPlacing.add("REDSTONE_ORE");
-		denyPlacing.add("IRON_BLOCK");
-		denyPlacing.add("IRON_ORE");
-		denyPlacing.add("GOLD_BLOCK");
-		denyPlacing.add("GOLD_ORE");
-		denyPlacing.add("DIAMOND_BLOCK");
-		denyPlacing.add("DIAMOND_ORE");
-		denyPlacing.add("EMERALD_BLOCK");
-		denyPlacing.add("EMERALD_ORE");
-		config.write("Deny-Placing", denyPlacing);
 
-		ArrayList<String> denyInteract = new ArrayList<>();
-		denyInteract.add("COAL");
-		denyInteract.add("COAL_BLOCK");
-		denyInteract.add("COAL_ORE");
-		denyInteract.add("REDSTONE");
-		denyInteract.add("REDSTONE_BLOCK");
-		denyInteract.add("REDSTONE_ORE");
-		denyInteract.add("IRON_INGOT");
-		denyInteract.add("IRON_BLOCK");
-		denyInteract.add("IRON_ORE");
-		denyInteract.add("GOLD_NUGGET");
-		denyInteract.add("GOLD_INGOT");
-		denyInteract.add("GOLD_BLOCK");
-		denyInteract.add("GOLD_ORE");
-		denyInteract.add("DIAMOND");
-		denyInteract.add("DIAMOND_BLOCK");
-		denyInteract.add("DIAMOND_ORE");
-		denyInteract.add("EMERALD");
-		denyInteract.add("EMERALD_BLOCK");
-		denyInteract.add("EMERALD_ORE");
-		denyInteract.add("GHAST_TEAR");
-		config.write("Deny-Interact", denyInteract);
+		config.write("Deny-Placing",
+				Arrays.asList("COAL_BLOCK", "COAL_ORE", "REDSTONE", "REDSTONE_BLOCK", "REDSTONE_ORE", "IRON_BLOCK",
+						"IRON_ORE", "GOLD_BLOCK", "GOLD_ORE", "DIAMOND_BLOCK", "DIAMOND_ORE", "EMERALD_BLOCK",
+						"EMERALD_ORE"));
+
+		config.write("Deny-Interact",
+				Arrays.asList("COAL", "COAL_BLOCK", "COAL_ORE", "REDSTONE", "REDSTONE_BLOCK", "REDSTONE_ORE",
+						"IRON_INGOT", "IRON_BLOCK", "IRON_ORE", "GOLD_NUGGET", "GOLD_INGOT", "GOLD_BLOCK", "GOLD_ORE",
+						"DIAMOND", "DIAMOND_BLOCK", "DIAMOND_ORE", "EMERALD", "EMERALD_BLOCK", "EMERALD_ORE",
+						"GHAST_TEAR"));
 		config.save();
 
 		ApiSync.syncConfig();
 		new GameModeChecker().runTaskTimer(this, 0, 1);
-		
+
 		try {
-		if (!this.getDataFolder().exists())
-			this.getDataFolder().mkdir();
-		thdb = new Database(new File(this.getDataFolder(), "blockdata.db"));
+			if (!this.getDataFolder().exists())
+				this.getDataFolder().mkdir();
+			thdb = new Database(new File(this.getDataFolder(), "blockdata.db"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -157,46 +130,49 @@ public class CreativeLimiter extends JavaPlugin implements Listener {
 		Updater.getUpdater().checkForUpdates();
 
 		if (Bukkit.getServer().getPluginManager().getPlugin("MinetopiaSDB") != null) {
-		    Logger.log(Logger.Severity.INFO, "Found MinetopiaSDB dependency. Hooking into the API...");
+			Logger.log(Logger.Severity.INFO, "Found MinetopiaSDB dependency. Hooking into the API...");
 			MinetopiaSDB = true;
-        }
+		}
 
 		Logger.log(Logger.Severity.INFO, "Syncing cache with database");
 		getCache().sync();
 	}
-	
+
 	public static Database thdb() {
 		return thdb;
 	}
 
 	public static void reloadConfigFiles() {
-			FileManager messages = new FileManager("messages.yml");
-			messageData.clear();
-			CreativeLimiter.pl.reloadConfig();
+		FileManager messages = new FileManager("messages.yml");
+		messageData.clear();
+		CreativeLimiter.pl.reloadConfig();
 
-			for (String message : messages.getFile().getKeys(false)) {
-				messageData.put(message, messages.getFile().getString(message));
-			}
+		for (String message : messages.getFile().getKeys(false)) {
+			messageData.put(message, messages.getFile().getString(message));
+		}
 	}
 
 	public static MemoryCache getCache() {
 		return CreativeLimiter.cache;
 	}
 
-	public static CreativeLimiterAPI getAPI() { return CreativeLimiter.api; }
+	public static CreativeLimiterAPI getAPI() {
+		return CreativeLimiter.api;
+	}
 
-    public boolean is19orUp() {
-        String nmsver = Bukkit.getServer().getClass().getPackage().getName();
-        nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
-        return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_");
-    }
+	public boolean is19orUp() {
+		String nmsver = Bukkit.getServer().getClass().getPackage().getName();
+		nmsver = nmsver.substring(nmsver.lastIndexOf(".") + 1);
+		return !nmsver.startsWith("v1_7_") && !nmsver.startsWith("v1_8_");
+	}
 
 	@Override
 	public void onDisable() {
-		//New arraylist because concurrent exceptions
+		// New arraylist because concurrent exceptions
 		Logger.log(Logger.Severity.INFO, "Removing all players from buildmode...");
-		for (Player p: new ArrayList<>(ChangeGameMode.getBuildingPlayers())) {
-			if (ChangeGameMode.getBuildingPlayers().contains(p)) ChangeGameMode.leaveBuildMode(p);
+		for (Player p : new ArrayList<>(ChangeGameMode.getBuildingPlayers())) {
+			if (ChangeGameMode.getBuildingPlayers().contains(p))
+				ChangeGameMode.leaveBuildMode(p);
 		}
 
 		Logger.log(Logger.Severity.INFO, "Syncing cache with database");

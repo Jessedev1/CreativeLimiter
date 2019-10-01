@@ -1,12 +1,11 @@
 package nl.mlgeditz.creativelimiter.api;
 
-import nl.mlgeditz.creativelimiter.CreativeLimiter;
-import nl.mlgeditz.creativelimiter.utils.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 
-import java.util.ArrayList;
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
+import nl.mlgeditz.creativelimiter.utils.Logger;
 
 public class CreativeLimiterAPI {
 

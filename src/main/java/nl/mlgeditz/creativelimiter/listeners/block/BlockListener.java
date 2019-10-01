@@ -1,7 +1,5 @@
 package nl.mlgeditz.creativelimiter.listeners.block;
 
-import nl.mlgeditz.creativelimiter.CreativeLimiter;
-import nl.mlgeditz.creativelimiter.utils.Logger;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -12,10 +10,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
+import nl.mlgeditz.creativelimiter.utils.Logger;
 
 /**
  * Created by MLGEditz and/or other contributors

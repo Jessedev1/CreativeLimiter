@@ -2,11 +2,17 @@ package nl.mlgeditz.creativelimiter.listeners.inventories.open;
 
 import java.util.ArrayList;
 
-import nl.mlgeditz.creativelimiter.CreativeLimiter;
-import nl.mlgeditz.creativelimiter.api.LimitedInventoryEvent;
-import nl.mlgeditz.creativelimiter.utils.Logger;
 import org.bukkit.Bukkit;
-import org.bukkit.block.*;
+import org.bukkit.block.Beacon;
+import org.bukkit.block.Block;
+import org.bukkit.block.BrewingStand;
+import org.bukkit.block.Chest;
+import org.bukkit.block.Dispenser;
+import org.bukkit.block.DoubleChest;
+import org.bukkit.block.Dropper;
+import org.bukkit.block.Furnace;
+import org.bukkit.block.Hopper;
+import org.bukkit.block.ShulkerBox;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.minecart.HopperMinecart;
@@ -18,11 +24,13 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
-import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
-import nl.mlgeditz.creativelimiter.utils.XMaterial;
-
 import nl.minetopiasdb.api.API;
 import nl.minetopiasdb.api.enums.DataType;
+import nl.mlgeditz.creativelimiter.CreativeLimiter;
+import nl.mlgeditz.creativelimiter.api.LimitedInventoryEvent;
+import nl.mlgeditz.creativelimiter.manager.ChangeGameMode;
+import nl.mlgeditz.creativelimiter.utils.Logger;
+import nl.mlgeditz.creativelimiter.utils.XMaterial;
 
 /**
  * Created by MLGEditz and/or other contributors No part of this publication may
